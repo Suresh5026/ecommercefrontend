@@ -26,7 +26,7 @@ function App() {
 
     if (userId && token) {
       axios
-        .post("http://localhost:5000/user/getCart", { userId }, {
+        .post("https://ecommercebackend-oe27.onrender.com/user/getCart", { userId }, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
