@@ -28,7 +28,7 @@ export default function EditProduct() {
 
       try {
         const response = await axios.get(
-          `https://ecommercebackend-oe27.onrender.com/product/getProduct/${id}`,
+          `http://localhost:5000/product/getProduct/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -92,7 +92,7 @@ export default function EditProduct() {
                 color: values.color.split(",").map((item) => item.trim()),
               };
               await axios.put(
-                `https://ecommercebackend-oe27.onrender.com/product/editProduct/${id}`,
+                `http://localhost:5000/product/editProduct/${id}`,
                 payload,
                 {
                   headers: {

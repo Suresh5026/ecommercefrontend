@@ -61,7 +61,7 @@ export default function Productcreate() {
             
             try {
               const response = await axios.post(
-                "https://ecommercebackend-oe27.onrender.com/product/createProduct",
+                "http://localhost:5000/product/createProduct",
                 payload,
                 {
                   headers: {

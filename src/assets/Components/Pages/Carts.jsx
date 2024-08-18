@@ -17,7 +17,7 @@ export default function Carts() {
 
     axios
       .post(
-        "https://ecommercebackend-oe27.onrender.com/user/getCart",
+        "http://localhost:5000/user/getCart",
         { userId },
         {
           headers: {
@@ -84,7 +84,7 @@ export default function Carts() {
       const userId = localStorage.getItem("userId");
       const token = localStorage.getItem("token");
 
-      await axios.delete("https://ecommercebackend-oe27.onrender.com/user/removeFromCart", {
+      await axios.delete("http://localhost:5000/user/removeFromCart", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -114,7 +114,7 @@ export default function Carts() {
       handler: function (response) {
         console.log(response, "paid");
         axios
-          .post("https://ecommercebackend-oe27.onrender.com/payment/verify", {
+          .post("http://localhost:5000/payment/verify", {
             response: response
           })
           .then((res) => {
@@ -123,7 +123,7 @@ export default function Carts() {
             console.log(res.data);
             
 
-            return axios.post("https://ecommercebackend-oe27.onrender.com/user/clearCart", {
+            return axios.post("http://localhost:5000/user/clearCart", {
               userId,
             });
           })
@@ -151,7 +151,7 @@ export default function Carts() {
     console.log(data);
     
     axios
-      .post("https://ecommercebackend-oe27.onrender.com/payment/orders", data)
+      .post("http://localhost:5000/payment/orders", data)
       .then((res) => {
         console.log(res.data.data);
         handleOpenRazorPay(res.data.data);

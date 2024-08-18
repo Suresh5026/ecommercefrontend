@@ -27,7 +27,7 @@ export default function Profile() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://ecommercebackend-oe27.onrender.com/user/getCurrentUser",
+          "http://localhost:5000/user/getCurrentUser",
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -10,7 +10,7 @@ export const ProProvider = ({ children }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('https://ecommercebackend-oe27.onrender.com/product/getProducts');
+        const response = await axios.get('http://localhost:5000/product/getProducts');
         // console.log(response);
         
         const proData = response.data.data; 

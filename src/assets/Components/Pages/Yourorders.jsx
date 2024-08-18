@@ -23,7 +23,7 @@ export default function Yourorders() {
           throw new Error("User ID is not available in local storage");
         }
 
-        const response = await axios.get(`https://ecommercebackend-oe27.onrender.com/payment/orders/user/${userId}`);
+        const response = await axios.get(`http://localhost:5000/payment/orders/user/${userId}`);
         setOrders(response.data.data);
       } catch (err) {
         setError(err.message);
@@ -37,7 +37,7 @@ export default function Yourorders() {
 
   
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (error) return <div> No Data Found </div>;
 
   return (
     <Table responsive>

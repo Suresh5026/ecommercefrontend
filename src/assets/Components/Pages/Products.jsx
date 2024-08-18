@@ -89,7 +89,7 @@ export default function Cards() {
   
       const data = { productId, userId };
   
-      axios.post('https://ecommercebackend-oe27.onrender.com/user/addTocart', data, {
+      axios.post('http://localhost:5000/user/addTocart', data, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then((res) => {
@@ -111,7 +111,7 @@ export default function Cards() {
   const handleDelete = (id) => {
     const token = localStorage.getItem('token');
     
-    axios.delete(`https://ecommercebackend-oe27.onrender.com/product/deleteProduct/${id}`, {
+    axios.delete(`http://localhost:5000/product/deleteProduct/${id}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then((res) => {
