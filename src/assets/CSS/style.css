@@ -1,0 +1,41 @@
+.imgLogo {
+  max-width: 90px;
+  height: 25%;
+}
+.MyNav {
+  margin-top: 10px;
+}
+
+.navbar {
+  background-color: lightgreen;
+}
+.nav-link {
+  font-weight: bold;
+  color: #333;
+}
+
+.nav-link:hover {
+  color: #ef0707;
+}
+
+.search-form .btn-outline-success {
+  color: #28a745;
+  border-color: #28a745;
+}
+
+.search-form .btn-outline-success:hover {
+  background-color: #28a745;
+  color: #fff;
+}
+.profilepage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardContainer {
+  margin: 2%;
+  padding: 1%;
+  min-width: 50vh;
+}
