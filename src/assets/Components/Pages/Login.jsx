@@ -35,7 +35,7 @@ export default function Login() {
               onSubmit={(values, { setSubmitting }) => {
                 setSubmitting(true);
                 axios
-                  .post("http://localhost:5000/user/login", values)
+                  .post("https://ecommercebackend-oe27.onrender.com/user/login", values)
                   .then((res) => {
                     const result = res.data;
                     // console.log(result);
