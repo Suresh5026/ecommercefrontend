@@ -103,7 +103,7 @@ export default function Carts() {
     }
   };
 
-  const handleOpenRazorPay = (data) => {
+  const handleOpenRazorPay = (data, userId, productIds) => {
     const options = {
       key: "rzp_test_tGoWeh9ybvAQtC",
       amount: Number(data.amount),
@@ -115,7 +115,8 @@ export default function Carts() {
         console.log(response, "paid");
         axios
           .post("https://ecommercebackend-oe27.onrender.com/payment/verify", {
-            response: response
+            response: response,
+            userId : userId
           })
           .then((res) => {
             const userId = localStorage.getItem("userId");
@@ -154,7 +155,7 @@ export default function Carts() {
       .post("https://ecommercebackend-oe27.onrender.com/payment/orders", data)
       .then((res) => {
         console.log(res.data.data);
-        handleOpenRazorPay(res.data.data);
+        handleOpenRazorPay(res.data.data, userId, productIds);
       })
       .catch((err) => {
         console.log(err);
