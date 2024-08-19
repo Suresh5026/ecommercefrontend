@@ -2,18 +2,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 
-
-
 export default function Carts() {
   const [cartItems, setCartItems] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
 
   useEffect(() => {
-    
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
-    console.log(userId);
-    
 
     axios
       .post(
@@ -26,7 +21,6 @@ export default function Carts() {
         }
       )
       .then((res) => {
-        console.log(res.data.data, "Cart Data");
         setCartItems(
           res.data.data.map((item) => ({
             ...item,
@@ -103,33 +97,31 @@ export default function Carts() {
     }
   };
 
-  const handleOpenRazorPay = (data, userId, productIds) => {
+  const handleOpenRazorPay = (data, productIds, userId) => {
     const options = {
       key: "rzp_test_tGoWeh9ybvAQtC",
       amount: Number(data.amount),
       currency: data.currency,
       order_id: data.id,
       name: "SHOP ZONE",
-      description: "payment testing",
+      description: "Payment testing",
+      notes: {
+        userId: userId,
+        productIds: productIds,
+      },
       handler: function (response) {
         console.log(response, "paid");
         axios
           .post("https://ecommercebackend-oe27.onrender.com/payment/verify", {
             response: response,
-            userId : userId
+            userId: userId,
           })
           .then((res) => {
-            const userId = localStorage.getItem("userId");
-            console.log(userId);
-            console.log(res.data);
-            
-
             return axios.post("https://ecommercebackend-oe27.onrender.com/user/clearCart", {
               userId,
             });
           })
           .then((res) => {
-            console.log(res);
             setCartItems([]);
             setSubtotal(0);
           })
@@ -144,22 +136,20 @@ export default function Carts() {
   };
 
   const handlePayment = (subtotal) => {
-    const productIds = cartItems.map((item) => item._id);
-    console.log(productIds);
+    const productIds = cartItems.map((item) => item._id); // Changed to productIds for clarity
+  const userId = localStorage.getItem("userId");
 
-    const userId = localStorage.getItem("userId");
-    const data = { amount:subtotal, productIds, userId };
-    console.log(data);
-    
-    axios
-      .post("https://ecommercebackend-oe27.onrender.com/payment/orders", data)
-      .then((res) => {
-        console.log(res.data.data);
-        handleOpenRazorPay(res.data.data, userId, productIds);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const data = { amount: subtotal, productIds, userId };
+
+  axios
+    .post("https://ecommercebackend-oe27.onrender.com/payment/orders", data)
+    .then((res) => {
+      console.log(res.data.data);
+      handleOpenRazorPay(res.data.data, productIds); // Pass productIds instead of productId
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   };
 
   return (
